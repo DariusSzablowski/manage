@@ -1,8 +1,6 @@
 package manage;
 
 import java.awt.Dimension;
-import java.io.File;
-import java.net.URL;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
