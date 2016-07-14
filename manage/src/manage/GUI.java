@@ -1,6 +1,8 @@
 package manage;
 
 import java.awt.Dimension;
+import java.io.File;
+import java.net.URL;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -20,14 +22,16 @@ public class GUI {
 		frame.setMinimumSize(new Dimension(840, 640));
 		frame.setVisible(true);
 		
-		JFXPanel jfxPanel = new JFXPanel(); // Scrollable JComponent
+		JFXPanel jfxPanel = new JFXPanel();
+		
+		String urlToGUI = GUI.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		String url = "file://" + urlToGUI.substring(0, urlToGUI.length() - 4) + "files/index.html";
 		
 		Platform.runLater( () -> {
 			WebView webView = new WebView();
-//			String url = this.getClass().getResource("files/index.html").toExternalForm();
-//			System.out.println(url);
-			webView.getEngine().load("file:///Users/DariusSzablowski/git/manage/manage/files/index.html");
+			webView.getEngine().load(url);
 	  		jfxPanel.setScene(new Scene(webView));
+	  		
 		});
 		
 		frame.add(jfxPanel);
