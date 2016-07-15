@@ -1,8 +1,6 @@
 package manage;
 
 import java.awt.Dimension;
-import java.io.File;
-import java.net.URL;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -10,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.web.WebView;
 
 import javax.swing.JFrame;
+
+import com.apple.eawt.FullScreenUtilities;
 
 public class GUI {
 	private JFrame frame;
@@ -20,7 +20,10 @@ public class GUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(840, 640);
 		frame.setMinimumSize(new Dimension(840, 640));
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
+		FullScreenUtilities.setWindowCanFullScreen(frame,true);
 		
 		JFXPanel jfxPanel = new JFXPanel();
 		
@@ -31,7 +34,6 @@ public class GUI {
 			WebView webView = new WebView();
 			webView.getEngine().load(url);
 	  		jfxPanel.setScene(new Scene(webView));
-	  		
 		});
 		
 		frame.add(jfxPanel);
