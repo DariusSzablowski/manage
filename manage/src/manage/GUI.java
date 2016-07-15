@@ -19,9 +19,9 @@ public class GUI {
 	{
 		frame = new JFrame("manage");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
 		frame.setSize(840, 640);
 		frame.setMinimumSize(new Dimension(840, 640));
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
 		FullScreenUtilities.setWindowCanFullScreen(frame,true);
