@@ -1,8 +1,5 @@
 package manage;
 
-import com.apple.eawt.Application;
-import com.apple.eawt.FullScreenUtilities;
-
 import java.awt.Dimension;
 
 import javafx.application.Platform;
@@ -11,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.web.WebView;
 
 import javax.swing.JFrame;
+
+import com.apple.eawt.FullScreenUtilities;
 
 public class GUI {
 	private JFrame frame;
