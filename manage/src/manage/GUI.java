@@ -1,5 +1,8 @@
 package manage;
 
+import com.apple.eawt.Application;
+import com.apple.eawt.FullScreenUtilities;
+
 import java.awt.Dimension;
 
 import javafx.application.Platform;
@@ -16,9 +19,12 @@ public class GUI {
 	{
 		frame = new JFrame("manage");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.setSize(840, 640);
 		frame.setMinimumSize(new Dimension(840, 640));
 		frame.setVisible(true);
+		
+		FullScreenUtilities.setWindowCanFullScreen(frame,true);
 		
 		JFXPanel jfxPanel = new JFXPanel();
 		
@@ -29,7 +35,6 @@ public class GUI {
 			WebView webView = new WebView();
 			webView.getEngine().load(url);
 	  		jfxPanel.setScene(new Scene(webView));
-	  		
 		});
 		
 		frame.add(jfxPanel);
