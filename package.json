@@ -1,0 +1,16 @@
+{
+  "name": "manage",
+  "version": "0.0.1",
+  "description": "A crossplatform Dashboard/Note/Organisation/Log Tool based on Electron and React",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Darius Szablowski",
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "electron-prebuilt": "^1.2.0",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1"
+  }
+}
