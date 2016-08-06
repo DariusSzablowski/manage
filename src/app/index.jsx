@@ -8,7 +8,6 @@ class App extends React.Component {
     return  (
       <div>
         <Navigation />
-        <p>The manage app works with React now!!!</p>
       </div>
     );
   }
