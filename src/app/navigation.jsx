@@ -4,18 +4,6 @@ import React from 'react';
 import Log from './log.jsx';
 import Stack from './stack.jsx';
 
-//exactly one of the menuItems needs to be active at all times!!!
-var menuItems = [
-  {
-    title: 'Stack',
-    active: true,
-  },
-  {
-    title: 'Log',
-    active: false,
-  },
-];
-
 var getComponentByName = function(name) {
   switch (name) {
     case 'Stack': return (<Stack />);
@@ -23,54 +11,102 @@ var getComponentByName = function(name) {
   }
 }
 
+//title should be a String and active a boolean
+var Item = function(title, active) {
+    this.title = title;
+    this.active = active;
+}
+
 class Navigation extends React.Component {
 
   constructor(props) {
     super(props);
-    var activeName = '';
 
-    menuItems.map(function(item) {
+    //exactly one of the items needs to be active at all times!!!
+    this.state = {
+      items : [
+        new Item('Stack', false),
+        new Item('Log', true),
+      ]
+    }
+
+    this.change = this.change.bind(this);
+    this.generateItems = this.generateItems.bind(this);
+  }
+
+  change(name, event) {
+    var current;
+
+    this.state.items.map(function(item) {
       if(item.active) {
-        activeName = item.title;
+        current = item.title;
       }
     });
 
-    //this.handleClick = this.handleClick.bind(this);
 
-    this.state = {
-      activeState: activeName,
+    if(name !== current) {
+      var that = this;
+      var newItems = new Array();
+
+      this.state.items.map(function(item) {
+        var b;
+
+        if(name === item.title) {
+          b = true;
+        }
+        else {
+          b = false;
+        }
+
+        item = new Item(item.title, b);
+        newItems.push(item);
+      });
+      console.log(newItems);
+
+      this.setState({items: newItems});
     }
   }
 
-  /*handleClick() {
-    console.log('CLICK');
-  }*/
+  generateItems() {
+    var buttonStyle;
+    var that = this;
 
-  render() {
-    var items = menuItems.map(function(item) {
+    var items = this.state.items.map(function(item) {
       if(item.active) {
-        var buttonStyle = Object.assign({}, styles.btn, styles.active);
+        buttonStyle = Object.assign({}, styles.btn, styles.active);
       }
       else
       {
-        var buttonStyle = Object.assign({}, styles.btn);
+        buttonStyle = Object.assign({}, styles.btn);
       }
+
       return (
         <li style={styles.li}>
-          <button ref={item.title.toLowerCase()} style={buttonStyle} type="button">
+          <button onClick={that.change.bind(that, item.title)} ref={item.title.toLowerCase()} style={buttonStyle} type="button">
             {item.title}
           </button>
         </li>
       );
     });
 
-    var component = getComponentByName(this.state.activeState);
+    return items;
+  }
+
+  render() {
+    console.log('render()');
+    var component;
+
+    this.state.items.map(function(item) {
+      if(item.active) {
+        component = getComponentByName(item.title);
+      }
+    });
 
     return (
       <div>
         <div style={styles.nav}>
           <ul style={styles.ul}>
-            {items}
+            {this.generateItems()}
           </ul>
         </div>
         {component}
@@ -85,7 +121,6 @@ var styles = {
     width: '100%',
     background: '#e6e6e6',
     //'-webkit-box-shadow': '0px 4px 36px 0px rgba(0,0,0,0.03)',
-    //position:'fixed',
   },
   ul: {
     height: '100%',
@@ -110,6 +145,7 @@ var styles = {
     fontSize: '16px',
     color: '#595959',
     ':hover': {
+      color: '#262626',
     },
     ':focus': {
       outline: 'none',
