@@ -1,8 +1,9 @@
 import Radium from 'radium';
 import React from 'react';
 
-import Log from './log.jsx';
-import Stack from './stack.jsx';
+import NavigationItem from './navigation-item.jsx';
+import Log from '../log.jsx';
+import Stack from '../stack.jsx';
 
 var getComponentByName = function(name) {
   switch (name) {
@@ -34,6 +35,7 @@ class Navigation extends React.Component {
     this.generateItems = this.generateItems.bind(this);
   }
 
+  //changes the active tab
   change(name, event) {
     var current;
 
@@ -42,7 +44,6 @@ class Navigation extends React.Component {
         current = item.title;
       }
     });
-
 
     if(name !== current) {
       var that = this;
@@ -67,25 +68,13 @@ class Navigation extends React.Component {
     }
   }
 
+  //generates the menu items used in the navigation
   generateItems() {
-    var buttonStyle;
     var that = this;
 
     var items = this.state.items.map(function(item) {
-      if(item.active) {
-        buttonStyle = Object.assign({}, styles.btn, styles.active);
-      }
-      else
-      {
-        buttonStyle = Object.assign({}, styles.btn);
-      }
-
       return (
-        <li style={styles.li}>
-          <button onClick={that.change.bind(that, item.title)} ref={item.title.toLowerCase()} style={buttonStyle} type="button">
-            {item.title}
-          </button>
-        </li>
+        <NavigationItem change={that.change} title={item.title} active={item.active} />
       );
     });
 
@@ -93,7 +82,6 @@ class Navigation extends React.Component {
   }
 
   render() {
-    console.log('render()');
     var component;
 
     this.state.items.map(function(item) {
@@ -104,6 +92,7 @@ class Navigation extends React.Component {
 
     return (
       <div>
+       <div style={styles.space} />
         <div style={styles.nav}>
           <ul style={styles.ul}>
             {this.generateItems()}
@@ -116,6 +105,10 @@ class Navigation extends React.Component {
 }
 
 var styles = {
+  space: {
+    height: '15px',
+    background: '#e6e6e6',
+  },
   nav: {
     height: '50px',
     width: '100%',
@@ -126,35 +119,7 @@ var styles = {
     height: '100%',
     margin: '0px',
     padding: '0px',
-  },
-  li: {
-    width: '20%',
-    height: '100%',
-    display: 'inline-block',
-    textAlign: 'center',
-    paddingLeft: '10px',
-    paddingRight: '10px'
-  },
-  btn: {
-    fontWeight: 'lighter',
-    height: '100%',
-    width: '100%',
-    padding: '0px',
-    background: 'transparent',
-    border: 'none',
-    fontSize: '16px',
-    color: '#595959',
-    ':hover': {
-      color: '#262626',
-    },
-    ':focus': {
-      outline: 'none',
-    }
-  },
-  active: {
-    background: 'white',
-    color: '#262626',
-    borderRadius: '6px 6px 0px 0px',
+    borderBottom: '1px '
   },
 };
 

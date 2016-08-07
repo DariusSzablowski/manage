@@ -15,7 +15,8 @@ var styles = {
   content: {
     display: 'block',
     margin: '20px',
-    background: '#ff00ff',
+    color: '#262626',
+    fontWeight: 'lighter',
   }
 };
 
