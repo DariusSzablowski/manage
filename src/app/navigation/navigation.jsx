@@ -62,7 +62,6 @@ class Navigation extends React.Component {
         item = new Item(item.title, b);
         newItems.push(item);
       });
-      console.log(newItems);
 
       this.setState({items: newItems});
     }

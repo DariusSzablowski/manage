@@ -5,7 +5,9 @@ class Stack extends React.Component {
   render () {
     return  (
       <div style={styles.content}>
-      This is the Stack!!!
+        <br />
+        <br />
+        <br />
       </div>
     );
   }
